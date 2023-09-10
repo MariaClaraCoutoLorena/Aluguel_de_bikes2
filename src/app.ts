@@ -31,6 +31,16 @@ export class App {
         return newId
     }
 
+    verificaUser(email: string, password: string): User{
+        for(let user of this.users){
+           if(user.email==email){
+            if(user.password=password) return user
+            else throw new Error("Senha incorreta!")
+           }
+        }
+        throw new Error("Este email não está cadastrado.")
+    }
+
     removeUser(email: string): void {
         const userIndex = this.users.findIndex(user => user.email === email)
         if (userIndex !== -1) {
