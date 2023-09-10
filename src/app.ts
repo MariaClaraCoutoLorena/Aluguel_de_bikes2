@@ -84,7 +84,7 @@ export class App {
     }
     listRents() {
         let datainicio, datafim
-        console.log("Rents:")
+        console.log("Reservas:")
         for(let rent of this.rents){
             datainicio = rent.dateFrom.getDate()+"/"+(rent.dateFrom.getMonth()+1)+"/"+rent.dateFrom.getFullYear()
             datafim = rent.dateTo.getDate()+"/"+(rent.dateTo.getMonth()+1)+"/"+rent.dateTo.getFullYear()
