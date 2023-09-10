@@ -26,7 +26,7 @@ app.returnBike(bikeId, 'jose@mail.com')
 app.listBikes()
 app.listUsers()
 app.listRents()
-
+app.verificaUser("maria@mail.com","1234")
 
 
 

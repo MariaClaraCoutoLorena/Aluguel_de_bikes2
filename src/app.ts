@@ -2,11 +2,12 @@ import { Bike } from "./bike";
 import { Rent } from "./rent";
 import { User } from "./user";
 import crypto from 'crypto'
-
+import bcrypt from 'bcrypt';
 export class App {
     users: User[] = []
     bikes: Bike[] = []
     rents: Rent[] = []
+    salt: String = bcrypt.genSaltSync(10)
 
     findUser(email: string): User {
         return this.users.find(user => user.email === email)
@@ -18,6 +19,7 @@ export class App {
                 throw new Error('Duplicate user.')
             }
         }
+        user.password = bcrypt.hashSync(user.password, this.salt)
         const newId = crypto.randomUUID()
         user.id = newId
         this.users.push(user)
@@ -33,10 +35,12 @@ export class App {
 
     verificaUser(email: string, password: string): User{
         for(let user of this.users){
-           if(user.email==email){
-            if(user.password=password) return user
-            else throw new Error("Senha incorreta!")
-           }
+            if(user.email==email){
+                if(user.password=bcrypt.hashSync(password, this.salt)) {
+                    console.log("Usuário logado com sucesso!")
+                    return user
+                }else throw new Error("Senha incorreta!")
+            }
         }
         throw new Error("Este email não está cadastrado.")
     }
