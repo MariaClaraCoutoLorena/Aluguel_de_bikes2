@@ -70,4 +70,25 @@ export class App {
         }
         throw new Error('Rent not found.')
     }
+    listBikes() {
+        console.log("Bikes:")
+        for(let bike of this.bikes){
+            console.log("- "+bike.name)
+        }
+    }
+    listUsers() {
+        console.log("Usuários:")
+        for(let user of this.users){
+            console.log("- "+user.name+", "+ user.email)
+        }
+    }
+    listRents() {
+        let datainicio, datafim
+        console.log("Rents:")
+        for(let rent of this.rents){
+            datainicio = rent.dateFrom.getDate()+"/"+(rent.dateFrom.getMonth()+1)+"/"+rent.dateFrom.getFullYear()
+            datafim = rent.dateTo.getDate()+"/"+(rent.dateTo.getMonth()+1)+"/"+rent.dateTo.getFullYear()
+            console.log("- Bike "+rent.bike.name+", reservada por "+rent.user.name+" de "+datainicio+" até "+datafim)
+        }
+    }
 }
